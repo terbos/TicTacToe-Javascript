@@ -1,0 +1,133 @@
+*, *::after, *::before
+{
+    box-sizing: border-box;
+}
+
+:root
+{
+    --cell-size: 100px;
+    --mark-size:calc(var(--cell-size)*0.9);
+}
+
+body
+{
+    margin: 0;
+}
+
+.board
+{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3,auto);
+}
+
+.cell
+{
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3)
+{
+    border-top: none;
+}
+
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9)
+{
+    border-right: none;
+}
+
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9)
+{
+    border-bottom: none;
+}
+
+.cell:first-child,
+.cell:nth-child(4),
+.cell:nth-child(7)
+{
+    border-left: none;
+}
+
+.cell.x,
+.cell.circle
+{
+    cursor: not-allowed;
+}
+
+.cell.x::before,
+.cell.x::after
+{
+    background-color: black;
+}
+
+
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after
+{
+   background-color: lightgrey;
+}
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after
+{
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size)* 0.15);
+    height: var(--mark-size);
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before
+{
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after
+{
+    transform: rotate(-45deg);
+}
+
+.cell.circle::before,
+.cell.circle::after
+{
+    content: '';
+    position: absolute;
+    width: var(--mark-size);
+    height: var(--mark-size);
+    border-radius: 50%;
+}
+
+.cell.circle::before
+{
+    width: var(--mark-size);
+    height: var(--mark-size);
+    background-color: black;
+}
+
+.cell.circle::after
+{
+    width: calc(var(--mark-size)* 0.7);
+    height: calc(var(--mark-size)* 0.7);
+    background-color: white;
+}
